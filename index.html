@@ -6,26 +6,37 @@
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
-    <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.7.0/d3.min.js"></script>
+    <script src="main.js" defer></script>
     <link rel="stylesheet" href="styles.css"></head>
   </link>
   </head>
-  <body onload="updateData()">
-    <h1>Embracing data-driven decision making to manage and communicate the impact of big science projects</h1>
+  <body>
+    <h1 class="title">Embracing data-driven decision making to manage and communicate the impact of big science projects</h1>
     <p>
-      <label>Dataset</label>
+      <!-- <label>Dataset</label>
       <select id="source" onchange="updateData()">
         <option value="combined">All Six</option>
-        <option value="ATLAS" selected>Physics &gt; ATLAS</option>
+        <option value="ATLAS">Physics &gt; ATLAS</option>
         <option value="BaBar">Physics &gt; BaBar</option>
         <option value="LIGO">Astronomy &gt; LIGO</option>
         <option value="IceCube">Astronomy &gt; IceCube </option>
         <option value="HGP">Biomedical &gt; HGP</option>
         <option value="HuBMAP+HCA">Biomedical &gt; HCA &amp; HuBMAP</option>
-      </select>
+      </select> -->
     </p>
     <div id="visualization"><em class="loading">Loading...</em></div>
-    <br>
-    <wc-markdown src="README.md" class="about"></wc-markdown>
+
+    <div id="selectionmenu"></div>
+    <div id="helpscreen" style="display:none">
+      <div class="mainHelp">
+        <em>Click anywhere to dimiss this guide.</em>
+        <wc-markdown src="README.md" class="about"></wc-markdown>
+      </div>
+
+      <div class="projectHelp">Select the project here</div>
+      </div>
+      <div class="question">?</div>
+    </div>
   </body>
 </html>
