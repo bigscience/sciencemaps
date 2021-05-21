@@ -329,7 +329,7 @@
         "fillOpacity": 0.75,
         "strokeOpacity": 0.9,
         "stroke": "#FFFFFF",
-        "strokeWidth": 3,
+        "strokeWidth": 5,
         "align": "left",
         "baseline": "middle"
       },
