@@ -17,7 +17,8 @@ function updateData() {
   setTimeout(() => {
     dataPromise.then(([spec, nodes, edges]) => {
       // const src = sourceSelector.value;
-      let src = projectToData[decodeURIComponent(location.hash.substring(1).toLowerCase())].name
+      let src = projectToData[decodeURIComponent(location.hash.substring(1).toLowerCase())].dataName
+      console.log(src)
       if (src !== 'All Six') {
         nodes = nodes.filter(n => n.src === src);
         edges = edges.filter(n => n.src === src);
@@ -25,10 +26,30 @@ function updateData() {
       spec.datasets.nodes = nodes;
       spec.datasets.edges = edges;
       document.getElementById('visualization').innerHTML = '';
+      
       return vegaEmbed("#visualization", spec, { "renderer": "png", "actions": true });
     }).then((results) => {
       finalize = results.finalize;
       // sourceSelector.disabled = false;
+      element = document.createElement("div")
+      element.className+=" question"
+      element.innerHTML = "?"
+      document.getElementById('visualization').appendChild(element)
+
+      d3.select(element).on("click", function(event, d) {
+        if(d3.select("#helpscreen").style("display")=="none"){
+          d3.select("#helpscreen").style("display",null);
+          d3.select(element).style("display","none");
+        }else{
+          d3.select("#helpscreen").style("display","none");
+          d3.select(element).style("display",null);
+        }
+      });
+      d3.select("#helpscreen").on("click", function(event, d) {
+        d3.select("#helpscreen").style("display","none");
+        d3.select(element).style("display",null);
+        
+      });
       console.log("Visualization successfully loaded");
     });
   }, 50);
@@ -37,36 +58,43 @@ function updateData() {
 let projectToData = {
   "combined":{
     name:"All Six",
+    dataName:"All Six",
     mapColor:"#BBB2B6",
     color:"#AAAAAA"
   },
   "atlas":{
     name:"ATLAS",
+    dataName:"ATLAS",
     mapColor:"#BBB2B6",
     color:"#CC006B"
   },
   "babar":{
     name:"BaBar",
+    dataName:"BaBar",
     mapColor:"#B1C3B6",
     color:"#008758"
   },
   "ligo":{
     name:"LIGO",
+    dataName:"LIGO",
     mapColor:"#B1A58C",
     color:"#903C22"
   },
   "icecube":{
     name:"IceCube",
+    dataName:"IceCube",
     mapColor:"#AFB9C9",
     color:"#1E6099"
   },
   "hgp":{
     name:"HGP",
+    dataName:"HGP",
     mapColor:"#AFB9C9",
     color:"#DB5921"
   },
   "hubmap+hca":{
-    name:"HuBMAP+HCA",
+    name:"HuBMAP & HCA",
+    dataName:"HuBMAP+HCA",
     mapColor:"#AFB9C9",
     color:"#CC0A21"
   },
@@ -103,17 +131,6 @@ function locationHashChanged() {
 
 window.addEventListener('hashchange', locationHashChanged);
 
-d3.select(".question").on("click", function(event, d) {
-  if(d3.select("#helpscreen").style("display")=="none"){
-    d3.select("#helpscreen").style("display",null);
-  }else{
-    d3.select("#helpscreen").style("display","none");
-  }
-});
-d3.select("#helpscreen").on("click", function(event, d) {
-  d3.select("#helpscreen").style("display","none");
-  
-});
 
 if(!window.location.hash){
   window.location.hash = "#combined";

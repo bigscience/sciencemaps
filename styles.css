@@ -26,6 +26,7 @@ select {
   margin-left: 15px;
 }
 #visualization {
+  position:relative;
   display: block;
   width: 1200px;
   height: 604px;
@@ -79,7 +80,7 @@ table tr:nth-child(2n) {
   align-items: center;
   justify-content: center;
   width:100px;
-  height:20px;
+  height:24px;
   padding:5px;
   font-size:14px;
   background-color:var(--color);
@@ -91,7 +92,7 @@ table tr:nth-child(2n) {
 }
 #selectionmenu a:hover{
   width:110px;
-  height:25px;
+  height:28px;
   padding:5px;
   font-size:16px;
 }
@@ -194,8 +195,8 @@ table tr:nth-child(2n) {
   border-radius: 50%;
   cursor: pointer;
   position:absolute;
-  top:5px;
-  left:10px;
+  bottom:5px;
+  right:154px;
   z-index: 200;
 
   -webkit-touch-callout: none;
